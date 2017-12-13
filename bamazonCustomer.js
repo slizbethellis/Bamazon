@@ -33,42 +33,39 @@ function displayItems() {
       console.log(`  ${results[i].item_id} | ${results[i].product_name} | ${results[i].department_name} | $${results[i].price}`);
     }
     inquirer.prompt([
-        {
-          type: "input",
-          name: "choice",
-          message: "What is the ID of the item you would like to buy?",
-          validate: function(value) {
-            if (value <= results.length) {
-              return true;
-            }
-            return false;
+      {
+        type: "input",
+        name: "choice",
+        message: "What is the ID of the product you wish to purchase?",
+        validate: function(value) {
+          if (value <= results.length) {
+            return true;
           }
+          return false;
         }
-        ]).then(function(answer) {
-          inquirer.prompt([
-            {
-              type: "input",
-              name: "quantity",
-              message: `How many units of ~${results[answer.choice - 1].product_name}~ would you like to buy?`,
-              validate: function(value) {
-                if (isNaN(value) === false) {
-                  return true;
-                }
-                return false;
-              }
-            }
-          ]).then(function(itemNum) {
-            var cartItem = results[answer.choice - 1];
-            var newQuantity = cartItem.stock_quantity - itemNum.quantity;
-            if (itemNum.quantity <= cartItem.stock_quantity) {
-              checkOut(newQuantity, cartItem, itemNum.quantity);
-            }
-            else {
-              console.log(chalk.red(`There are only ${cartItem.stock_quantity} unit(s) of ~${cartItem.product_name}~ left.`));
-              askCustomer();
-            }
-          });
-        });
+      },
+      {
+        type: "input",
+        name: "quantity",
+        message: "How many units would you like to buy?",
+        validate: function(value) {
+          if (isNaN(value) === false) {
+            return true;
+          }
+          return false;
+        }
+      }
+      ]).then(function(answer) {
+        var cartItem = results[answer.choice - 1];
+        var newQuantity = cartItem.stock_quantity - parseInt(answer.quantity);
+        if (parseInt(answer.quantity) <= parseInt(cartItem.stock_quantity)) {
+          checkOut(newQuantity, cartItem, parseInt(answer.quantity));
+        }
+        else {
+          console.log(chalk.red(`There are only ${cartItem.stock_quantity} unit(s) of ~${cartItem.product_name}~ left.`));
+          askCustomer();
+        }
+      });
   });
 }
 
