@@ -1,0 +1,25 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "a CLI storefront",
+  "main": "bamazon.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slizbethellis/Bamazon.git"
+  },
+  "author": "Sarah Ellis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/slizbethellis/Bamazon/issues"
+  },
+  "homepage": "https://github.com/slizbethellis/Bamazon#readme",
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "cli-table-redemption": "^1.0.1",
+    "inquirer": "^4.0.1",
+    "mysql": "^2.15.0"
+  }
+}
