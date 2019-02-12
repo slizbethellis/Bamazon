@@ -120,7 +120,7 @@ function addInventory() {
       var query = "UPDATE products SET ? WHERE ?";
       connection.query(query, [{stock_quantity: newQuantity},{item_id: answer.item}], function(err) {
         if (err) throw err;
-        console.log(chalk.green(`You have have added ${answer.quantity} unit(s) of ~${results[answer.item].product_name}~.`));
+        console.log(chalk.green(`You have have added ${answer.quantity} unit(s) of ~${results[answer.item - 1].product_name}~.`));
         askContinue();
       });
     });
